@@ -2,4 +2,5 @@
 build/
 dist/
 fomoro_lab.egg-info/
+*.pyc
 .DS_Store

@@ -4,7 +4,6 @@ import requests
 import subprocess
 
 ENV = os.environ.get('ENV', 'development')
-API_KEY = os.environ.get('API_KEY')
 
 if ENV == 'production':
     API_URL = 'https://api.fomoro.com/api/v0.1/experiments/{}/results'
@@ -54,17 +53,8 @@ class Experiment(object):
 
     def report(self, loss, accuracy=None):
         api_url = API_URL.format(self.experiment_id)
-        requests.post(api_url, json={
+        json = {
             "hash": self.hash,
             "loss": loss,
-        })
-
-def main():
-    experiment = Experiment(API_KEY, 141)
-    for i in experiment.iter(range(10)):
-        print('step', i)
-    experiment.report(1.24, accuracy=0.13)
-    # experiment.reset()
-
-if __name__ == '__main__':
-    main()
+        }
+        requests.post(api_url, json=json)
