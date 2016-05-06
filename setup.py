@@ -7,18 +7,16 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'lab'))
 
 from version import version
 
-def read(fname):
-    return open(os.path.join(os.path.dirname(__file__), fname)).read()
+with open('README.md') as f:
+    long_description = f.read()
 
-packages = [package for package in find_packages() if package.startswith('lab')]
-
-setup(name='fomoro-lab',
+setup(name='lab',
     version=version,
     description='An API helper for sending results to Fomoro.',
-    long_description=read('README.md'),
+    long_description=long_description,
     url='https://github.com/fomorians/fomoro-lab',
     author='Fomoro',
     author_email='jim@fomoro.com',
-    packages=packages,
+    packages=['lab'],
     install_requires=['requests==2.10.0', 'six'],
 )
