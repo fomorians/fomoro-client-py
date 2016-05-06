@@ -64,7 +64,7 @@ def main():
     for i in experiment.iter(range(10)):
         print('step', i)
     experiment.report(1.24, accuracy=0.13)
-    experiment.reset()
+    # experiment.reset()
 
 if __name__ == '__main__':
     main()
