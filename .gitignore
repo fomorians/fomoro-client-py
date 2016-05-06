@@ -1,0 +1,5 @@
+.env/
+build/
+dist/
+fomoro_lab.egg-info/
+.DS_Store
