@@ -12,11 +12,16 @@ with open('README.md') as f:
 
 setup(name='lab',
     version=version,
-    description='An API helper for sending results to Fomoro.',
+    description='Fomoro client library.',
     long_description=long_description,
     url='https://github.com/fomorians/fomoro-lab',
     author='Fomoro',
     author_email='jim@fomoro.com',
     packages=['lab'],
-    install_requires=['requests==2.10.0', 'six'],
+    install_requires=[
+        'python-dateutil==2.5.3',
+        'pytz==2016.4',
+        'requests==2.10.0',
+        'six==1.10.0'
+    ],
 )

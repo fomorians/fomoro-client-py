@@ -1,4 +1,5 @@
 import os
+import random
 
 from lab.experiment import Experiment
 
@@ -8,8 +9,7 @@ def main():
     experiment = Experiment(API_KEY, 1)
     for i in experiment.iter(range(10)):
         print('step', i)
-    experiment.report(1.24, accuracy=0.13)
-    # experiment.reset()
+    experiment.report(random.random(), random.random())
 
 if __name__ == '__main__':
     main()
