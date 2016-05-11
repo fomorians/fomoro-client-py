@@ -50,9 +50,9 @@ def get_git_dirty():
         return True
 
 class Experiment(object):
-    def __init__(self, api_key, project_id):
+    def __init__(self, api_key, project_key):
         self.api_key = api_key
-        self.project_id = project_id
+        self.project_key = project_key
 
         try:
             self.git_log = get_git_log()
@@ -99,7 +99,7 @@ class Experiment(object):
         self.end()
 
     def report(self, loss, accuracy=None):
-        api_url = API_URL.format(self.project_id)
+        api_url = API_URL.format(self.project_key)
 
         author_date = self.git_log['author_date']
         author_date = dateutil.parser.parse(author_date) \
