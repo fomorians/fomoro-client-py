@@ -3,21 +3,21 @@ import sys
 
 from setuptools import setup, find_packages
 
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'lab'))
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'fomoro'))
 
 from version import version
 
 with open('README.md') as f:
     long_description = f.read()
 
-setup(name='lab',
+setup(name='fomoro',
     version=version,
     description='Fomoro client library.',
     long_description=long_description,
-    url='https://github.com/fomorians/fomoro-lab',
-    author='Fomoro',
+    url='https://github.com/fomorians/fomoro-client-py',
+    author='Jim Fleming',
     author_email='jim@fomoro.com',
-    packages=['lab'],
+    packages=['fomoro'],
     install_requires=[
         'python-dateutil==2.5.3',
         'pytz==2016.4',

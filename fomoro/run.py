@@ -51,9 +51,9 @@ def get_git_dirty():
         return True
 
 class Experiment(object):
-    def __init__(self, api_key, project_key):
-        self.api_key = api_key
+    def __init__(self, project_key, api_key):
         self.project_key = project_key
+        self.api_key = api_key
 
         try:
             self.git_log = get_git_log()
