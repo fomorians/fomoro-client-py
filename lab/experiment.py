@@ -7,13 +7,13 @@ import dateutil.parser
 import requests
 import subprocess
 
-ENV = os.environ.get('ENV', 'development')
+ENV = os.environ.get('PYENV', 'production')
 
 if ENV == 'production':
     API_URL = 'https://api.fomoro.com/api/v0.1/projects/{}/runs'
 else:
     # API_URL = 'http://localhost:3000/api/v0.1/projects/{}/runs'
-    API_URL = 'http://dev.api.fomoro.com/api/0.1/projects/{}/runs'
+    API_URL = 'http://dev.api.fomoro.com/api/v0.1/projects/{}/runs'
 
 def get_git_log():
     format_str = '''
