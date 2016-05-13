@@ -13,7 +13,7 @@ FOMORO_API_KEY = os.environ.get('FOMORO_API_KEY')
 # - api_key (required): your api key
 # - hyperparams (optional): dictionary of hyperparameters you want to log with the results
 # - metadata (optional): dictionary of additional metadata like number of model parameters
-run = Run(project_key='6CAc248f', api_key=FOMORO_API_KEY, hyperparams={
+run = Run(project_key='rJbwGJNf', api_key=FOMORO_API_KEY, hyperparams={
     "batch_size": 1
 }, metadata={
     "num_parameters": 1e6
