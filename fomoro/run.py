@@ -75,7 +75,7 @@ class Run(object):
         self.start_time = None
         self.end_time = None
         self.total_time = None
-        self.average_time = None
+        self.average_step_time = None
         self.loss = None
 
     def begin(self):
@@ -84,7 +84,7 @@ class Run(object):
     def end(self):
         self.end_time = datetime.datetime.utcnow()
         self.total_time = self.end_time - self.start_time
-        self.average_time = self.total_time / self.steps
+        self.average_step_time = self.total_time / self.steps
 
     def iter(self, iterable, steps=None):
         self.begin()
@@ -117,10 +117,11 @@ class Run(object):
             "author_name": self.git_log['author_name'],
             "author_email": self.git_log['author_email'],
             "author_date": author_date,
-            "start_time": self.start_time.isoformat(),
-            "end_time": self.end_time.isoformat(),
-            "total_time": self.total_time.total_seconds(),
-            "average_time": self.average_time.total_seconds(),
+            "training_start_time": self.start_time.isoformat(),
+            "training_end_time": self.end_time.isoformat(),
+            "training_total_time": self.total_time.total_seconds(),
+            "training_average_step_time": self.average_step_time.total_seconds(),
+            "training_steps": self.steps,
             "dirty": self.dirty,
             "branch": self.branch,
             "loss": loss,
