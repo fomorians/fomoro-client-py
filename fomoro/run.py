@@ -50,7 +50,7 @@ def get_git_dirty():
     except subprocess.CalledProcessError as e:
         return True
 
-class Experiment(object):
+class Run(object):
     def __init__(self, project_key, api_key):
         self.project_key = project_key
         self.api_key = api_key
