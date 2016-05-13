@@ -1,7 +1,7 @@
 import os
 import random
 
-from fomoro import Run
+from fomoro.run import Run
 
 FOMORO_API_KEY = os.environ.get('FOMORO_API_KEY')
 
