@@ -51,10 +51,11 @@ def get_git_dirty():
         return True
 
 class Run(object):
-    def __init__(self, project_key, api_key, hyperparameters=None):
+    def __init__(self, project_key, api_key, hyperparams=None, metadata=None):
         self.project_key = project_key
         self.api_key = api_key
-        self.hyperparameters = hyperparameters
+        self.hyperparams = hyperparams
+        self.metadata = metadata
 
         try:
             self.git_log = get_git_log()
@@ -100,7 +101,7 @@ class Run(object):
 
         self.end()
 
-    def report(self, loss, accuracy=None):
+    def report(self, loss, results=None):
         api_url = API_URL.format(self.project_key)
 
         author_date = self.git_log['author_date']
@@ -123,8 +124,9 @@ class Run(object):
             "dirty": self.dirty,
             "branch": self.branch,
             "loss": loss,
-            "accuracy": accuracy,
-            "hyperparameters": json.dumps(self.hyperparameters)
+            "hyperparams": json.dumps(self.hyperparams),
+            "metadata": json.dumps(self.metadata),
+            "results": json.dumps(results),
         }
 
         headers = {
