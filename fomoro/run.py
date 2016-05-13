@@ -51,9 +51,10 @@ def get_git_dirty():
         return True
 
 class Run(object):
-    def __init__(self, project_key, api_key):
+    def __init__(self, project_key, api_key, hyperparameters=None):
         self.project_key = project_key
         self.api_key = api_key
+        self.hyperparameters = hyperparameters
 
         try:
             self.git_log = get_git_log()
@@ -108,7 +109,7 @@ class Run(object):
             .replace(tzinfo=None) \
             .isoformat()
 
-        json = {
+        data = {
             "commit_hash": self.git_log['commit_hash'],
             "commit_subject": self.git_log['subject'],
             "commit_body": self.git_log['body'],
@@ -122,13 +123,14 @@ class Run(object):
             "dirty": self.dirty,
             "branch": self.branch,
             "loss": loss,
-            "accuracy": accuracy
+            "accuracy": accuracy,
+            "hyperparameters": json.dumps(self.hyperparameters)
         }
 
         headers = {
             'Authorization': 'Bearer {}'.format(self.api_key)
         }
 
-        r = requests.post(api_url, json=json, headers=headers)
+        r = requests.post(api_url, json=data, headers=headers)
         if r.status_code != 200:
             print(r.text)
