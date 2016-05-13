@@ -12,8 +12,8 @@ ENV = os.environ.get('PYENV', 'production')
 if ENV == 'production':
     API_URL = 'https://api.fomoro.com/api/v0.1/projects/{}/runs'
 else:
-    # API_URL = 'http://localhost:3000/api/v0.1/projects/{}/runs'
     API_URL = 'http://dev.api.fomoro.com/api/v0.1/projects/{}/runs'
+    # API_URL = 'http://localhost:3000/api/v0.1/projects/{}/runs'
 
 def get_git_log():
     format_str = '''
@@ -27,10 +27,11 @@ def get_git_log():
         }
         '''
 
+    # flatten json format
     format_str = json.loads(format_str)
     format_str = json.dumps(format_str)
 
-    output = subprocess.check_output('git log --max-count=1 --format=\'{}\''.format(format_str), \
+    output = subprocess.check_output("git log --max-count=1 --format='{}'".format(format_str), \
         shell=True, \
         stderr=subprocess.STDOUT)
 
