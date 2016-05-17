@@ -7,7 +7,7 @@ import dateutil.parser
 import requests
 import subprocess
 
-ENV = os.environ.get('PYENV', 'production')
+ENV = os.environ.get('ENV', 'production')
 
 if ENV == 'production':
     API_URL = 'https://api.fomoro.com/projects/{}/runs'
