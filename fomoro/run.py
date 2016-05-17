@@ -63,7 +63,7 @@ class Run(object):
             self.branch = get_git_branch()
 
             if self.dirty:
-                print('WARNING: You have uncommitted changes.')
+                print('[fomoro] WARNING: You have uncommitted changes.')
 
         except subprocess.CalledProcessError as e:
             print('Failed to retrieve git information.')
