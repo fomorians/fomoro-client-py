@@ -85,7 +85,10 @@ class Run(object):
     def end(self):
         self.end_time = datetime.datetime.utcnow()
         self.total_time = self.end_time - self.start_time
-        self.average_step_time = self.total_time / self.steps
+        if self.steps and self.steps > 0:
+            self.average_step_time = self.total_time / self.steps
+        else:
+            self.average_step_time = self.total_time
 
     def iter(self, iterable, steps=None):
         if steps is None:
