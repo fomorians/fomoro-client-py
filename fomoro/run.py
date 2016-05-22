@@ -1,3 +1,5 @@
+from __future__ import division
+
 import os
 import json
 import pytz
@@ -73,6 +75,7 @@ class Run(object):
         self.begin()
 
     def reset(self):
+        self.steps = 1
         self.start_time = None
         self.end_time = None
         self.total_time = None
@@ -85,10 +88,7 @@ class Run(object):
     def end(self):
         self.end_time = datetime.datetime.utcnow()
         self.total_time = self.end_time - self.start_time
-        if self.steps and self.steps > 0:
-            self.average_step_time = self.total_time / self.steps
-        else:
-            self.average_step_time = self.total_time
+        self.average_step_time = self.total_time / self.steps
 
     def iter(self, iterable, steps=None):
         if steps is None:
