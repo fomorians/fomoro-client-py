@@ -70,6 +70,7 @@ class Run(object):
             print('Make sure you are running inside of a git repo and committed.')
 
         self.reset()
+        self.begin()
 
     def reset(self):
         self.start_time = None
@@ -87,8 +88,6 @@ class Run(object):
         self.average_step_time = self.total_time / self.steps
 
     def iter(self, iterable, steps=None):
-        self.begin()
-
         if steps is None:
             try:
                 steps = len(iterable)
@@ -99,9 +98,9 @@ class Run(object):
         for obj in iterable:
             yield obj
 
+    def report(self, loss, results=None):
         self.end()
 
-    def report(self, loss, results=None):
         api_url = API_URL.format(self.project_key)
 
         author_date = self.git_log['author_date']
