@@ -9,13 +9,11 @@ import dateutil.parser
 import requests
 import subprocess
 
-ENV = os.environ.get('ENV', 'production')
+PYENV = os.environ.get('PYENV', 'production')
+FOMORO_RUN_ID = os.environ.get('FOMOR_RUN_ID', None)
 
-if ENV == 'production':
-    API_URL = 'https://api.fomoro.com/projects/{}/runs'
-else:
-    API_URL = 'http://dev.api.fomoro.com/projects/{}/runs'
-    # API_URL = 'http://localhost:3000/projects/{}/runs'
+API_HOST = 'https://api.fomoro.com' if PYENV == 'production' else 'http://dev.api.fomoro.com'
+# API_HOST = 'http://localhost:3000'
 
 def get_git_log():
     format_str = '''
@@ -104,8 +102,6 @@ class Run(object):
     def report(self, loss, results=None):
         self.end()
 
-        api_url = API_URL.format(self.project_key)
-
         author_date = self.git_log['author_date']
         author_date = dateutil.parser.parse(author_date) \
             .astimezone(tz=pytz.utc) \
@@ -136,6 +132,12 @@ class Run(object):
             'Authorization': 'Bearer {}'.format(self.api_key)
         }
 
-        r = requests.post(api_url, json=data, headers=headers)
+        if FOMORO_RUN_ID:
+            api_url = API_HOST + '/projects/{}/runs/{}'.format(self.project_key, FOMORO_RUN_ID)
+            r = requests.put(api_url, json=data, headers=headers)
+        else:
+            api_url = API_HOST + '/projects/{}/runs'.format(self.project_key)
+            r = requests.post(api_url, json=data, headers=headers)
+
         if r.status_code != 200:
             print(r.text)
