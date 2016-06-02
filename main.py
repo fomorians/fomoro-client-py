@@ -8,7 +8,7 @@ from fomoro.run import Run
 # (more secure than saving it in the file and version control)
 PYENV = os.environ.get('PYENV', 'production')
 FOMORO_API_KEY = os.environ.get('FOMORO_API_KEY_PROD' if PYENV == 'production' else 'FOMORO_API_KEY_DEV')
-PROJECT_KEY = 'HkUllWdM' if PYENV == 'production' else 'HJ8C8ga7'
+PROJECT_KEY = 'HkUllWdM' if PYENV == 'production' else 'rki7KxaQ'
 
 # create a new `Run` instance, setting appropriate arguments:
 # - project_key (required): your project key
