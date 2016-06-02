@@ -6,9 +6,9 @@ from fomoro.run import Run
 
 # read api key from an environment variable
 # (more secure than saving it in the file and version control)
-ENV = os.environ.get('ENV', 'production')
-FOMORO_API_KEY = os.environ.get('FOMORO_API_KEY_PROD' if ENV == 'production' else 'FOMORO_API_KEY_DEV')
-PROJECT_KEY = 'HkUllWdM' if ENV == 'production' else 'rJnCzluf'
+PYENV = os.environ.get('PYENV', 'production')
+FOMORO_API_KEY = os.environ.get('FOMORO_API_KEY_PROD' if PYENV == 'production' else 'FOMORO_API_KEY_DEV')
+PROJECT_KEY = 'HkUllWdM' if PYENV == 'production' else 'HJ8C8ga7'
 
 # create a new `Run` instance, setting appropriate arguments:
 # - project_key (required): your project key
