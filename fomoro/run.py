@@ -5,9 +5,10 @@ import json
 import pytz
 import time
 import datetime
-import dateutil.parser
 import requests
 import subprocess
+
+from tzlocal import get_localzone
 
 PYENV = os.environ.get('PYENV', 'production')
 FOMORO_RUN_ID = os.environ.get('FOMOR_RUN_ID', None)
@@ -25,7 +26,7 @@ def get_git_log():
             "commit_hash": "%H",
             "author_name": "%an",
             "author_email": "%ae",
-            "author_date": "%aI",
+            "author_date": "%at",
             "subject": "%s",
             "body": "%b"
         }
@@ -106,10 +107,11 @@ class Run(object):
     def report(self, loss, results=None):
         self.end()
 
-        author_date = self.git_log['author_date']
-        author_date = dateutil.parser.parse(author_date) \
+        tz = get_localzone()
+
+        author_date = float(self.git_log['author_date'])
+        author_date = datetime.datetime.fromtimestamp(author_date, tz) \
             .astimezone(tz=pytz.utc) \
-            .replace(tzinfo=None) \
             .isoformat()
 
         data = {

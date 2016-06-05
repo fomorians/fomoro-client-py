@@ -19,8 +19,8 @@ setup(name='fomoro',
     author_email='jim@fomoro.com',
     packages=['fomoro'],
     install_requires=[
-        'python-dateutil==2.5.3',
         'pytz==2016.4',
+        'tzlocal==1.2.2',
         'requests==2.10.0',
         'six==1.10.0'
     ],
