@@ -12,8 +12,17 @@ import subprocess
 PYENV = os.environ.get('PYENV', 'production')
 FOMORO_RUN_ID = os.environ.get('FOMOR_RUN_ID', None)
 
-API_HOST = 'https://api.fomoro.com' if PYENV == 'production' else 'http://dev.api.fomoro.com'
-# API_HOST = 'http://localhost:3000'
+if PYENV == 'production':
+    API_HOST = 'https://api.fomoro.com' 
+elif PYENV == 'staging':
+    API_HOST = 'http://dev.api.fomoro.com'
+else:
+    API_HOST = 'http://localhost:3000'
+
+def get_git_version():
+    version = subprocess.check_output([ 'git', 'version' ], stderr=subprocess.STDOUT)
+    version = version.strip()
+    return version
 
 def get_git_log():
     format_str = '''
@@ -60,6 +69,8 @@ class Run(object):
         try:
             self.git_log = get_git_log()
             print(self.git_log)
+            self.git_version = get_git_version()
+            print(self.git_version)
             self.dirty = get_git_dirty()
             self.branch = get_git_branch()
 
