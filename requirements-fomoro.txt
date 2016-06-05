@@ -1,1 +1,1 @@
--r requirements.txt
+tzlocal==1.2.2
