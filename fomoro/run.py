@@ -59,6 +59,7 @@ class Run(object):
 
         try:
             self.git_log = get_git_log()
+            print(self.git_log)
             self.dirty = get_git_dirty()
             self.branch = get_git_branch()
 
