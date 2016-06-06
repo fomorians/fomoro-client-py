@@ -10,12 +10,12 @@ import subprocess
 
 from tzlocal import get_localzone
 
-PYENV = os.environ.get('PYENV', 'production')
-FOMORO_RUN_ID = os.environ.get('FOMOR_RUN_ID', None)
+FOMORO_ENV = os.environ.get('FOMORO_ENV', 'production')
+FOMORO_RUN_ID = os.environ.get('FOMORO_RUN_ID', None)
 
-if PYENV == 'production':
+if FOMORO_ENV == 'production':
     API_HOST = 'https://api.fomoro.com' 
-elif PYENV == 'staging':
+elif FOMORO_ENV == 'staging':
     API_HOST = 'http://dev.api.fomoro.com'
 else:
     API_HOST = 'http://localhost:3000'
