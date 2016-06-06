@@ -10,7 +10,7 @@ import subprocess
 
 from tzlocal import get_localzone
 
-FOMORO_ENV = os.environ.get('FOMORO_ENV', 'production')
+FOMORO_ENV = os.environ.get('FOMORO_ENV', None)
 FOMORO_RUN_ID = os.environ.get('FOMORO_RUN_ID', None)
 
 if FOMORO_ENV == 'production':
@@ -115,6 +115,7 @@ class Run(object):
             .isoformat()
 
         data = {
+            "run_id": FOMORO_RUN_ID,
             "commit_hash": self.git_log['commit_hash'],
             "commit_subject": self.git_log['subject'],
             "commit_body": self.git_log['body'],
@@ -138,12 +139,7 @@ class Run(object):
             'Authorization': 'Bearer {}'.format(self.api_key)
         }
 
-        if FOMORO_RUN_ID:
-            api_url = API_HOST + '/projects/{}/runs/{}'.format(self.project_key, FOMORO_RUN_ID)
-            r = requests.put(api_url, json=data, headers=headers)
-        else:
-            api_url = API_HOST + '/projects/{}/runs'.format(self.project_key)
-            r = requests.post(api_url, json=data, headers=headers)
-
+        api_url = API_HOST + '/projects/{}/results'.format(self.project_key)
+        r = requests.post(api_url, json=data, headers=headers)
         if r.status_code != 200:
             print(r.text)
