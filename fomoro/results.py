@@ -55,7 +55,7 @@ def get_git_dirty():
     except subprocess.CalledProcessError as e:
         return True
 
-class Run(object):
+class Results(object):
     def __init__(self, project_key, api_key, hyperparams=None, metadata=None):
         self.project_key = project_key
         self.api_key = api_key
