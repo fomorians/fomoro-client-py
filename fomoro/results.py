@@ -141,5 +141,5 @@ class Results(object):
         api_url = API_HOST + '/projects/{}/results'.format(self.project_key)
         r = requests.post(api_url, json=data, headers=headers)
         if r.status_code != 200:
-            json = r.json()
-            print('Failed to record results: {}'.format(json['error']))
+            data = r.json()
+            print('Failed to record results: {}'.format(data['error']))
