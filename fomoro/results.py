@@ -16,8 +16,8 @@ FOMORO_RUN_ID = os.environ.get('FOMORO_RUN_ID', None)
 if FOMORO_ENV == 'production':
     API_HOST = 'https://api.fomoro.com' 
 else:
-    # API_HOST = 'http://dev.api.fomoro.com'
-    API_HOST = 'http://localhost:3000'
+    API_HOST = 'http://dev.api.fomoro.com'
+    # API_HOST = 'http://localhost:3000'
 
 def get_git_log():
     format_str = '''
