@@ -9,8 +9,6 @@ from fomoro.results import Results
 FOMORO_API_KEY = os.environ.get('FOMORO_API_KEY')
 PROJECT_KEY = 'rki7KxaQ'
 
-print("\"{}\"".format(FOMORO_API_KEY))
-
 # create a new `Results` instance, setting appropriate arguments:
 # - project_key (required): your project key
 # - api_key (required): your api key
