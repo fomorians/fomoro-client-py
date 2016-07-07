@@ -1,7 +1,10 @@
 import os
+import json
 import random
 
 from fomoro import Fomoro
+
+FOMORO_ARTIFACTS = os.environ.get('FOMORO_ARTIFACTS', None)
 
 # read api key from an environment variable
 # (more secure than saving it in the file and version control)
@@ -26,6 +29,13 @@ for i in client.iter(range(10)):
 # finally, report the results:
 # - loss (required): model loss
 # - results (optional): dictionary of additional results like accuracy, AUC, etc.
-client.report(loss=random.random(), results={
+loss = random.random()
+results = {
     "accuracy": random.random()
-})
+}
+client.report(loss=loss, results=results)
+
+if FOMORO_ARTIFACTS:
+    print('Writing artifacts...')
+    with open(os.path.join(FOMORO_ARTIFACTS, 'results.json'), 'w') as f:
+        f.write(json.dumps(results))
