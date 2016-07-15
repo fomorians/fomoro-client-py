@@ -10,7 +10,7 @@ import subprocess
 
 from tzlocal import get_localzone
 
-FOMORO_ENV = os.environ.get('FOMORO_ENV', None)
+FOMORO_ENV = os.environ.get('FOMORO_ENV', 'production')
 FOMORO_RUN_ID = os.environ.get('FOMORO_RUN_ID', None)
 
 if FOMORO_ENV == 'production':
